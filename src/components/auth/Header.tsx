@@ -1,15 +1,11 @@
+import useSession from '@/hooks/useSession';
 import Link from 'next/link';
 import Logged from './Logged';
 import Login from './Login';
 
-type HeaderProps = {
-  session: {
-    expires: string;
-    user: { email: string; image: string; name: string };
-  };
-};
+export default function Header() {
+  const { session } = useSession();
 
-export default function Header({ session }: HeaderProps) {
   return (
     <header className='flex justify-center items-center h-16 bg-gray-700'>
       <div className='flex justify-between items-center w-full mx-6'>

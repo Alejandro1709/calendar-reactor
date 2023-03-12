@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout';
 import Showcase from '@/components/Showcase';
+import { AuthProvider } from '@/context/authContext';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 
@@ -12,13 +13,14 @@ type HomeProps = {
 
 export default function Home({ session }: HomeProps) {
   return (
-    <Layout
-      title='Calendtion'
-      description='Upload your schedule and have people react to it!'
-      session={session}
-    >
-      <Showcase />
-    </Layout>
+    <AuthProvider session={session}>
+      <Layout
+        title='Calendtion'
+        description='Upload your schedule and have people react to it!'
+      >
+        <Showcase />
+      </Layout>
+    </AuthProvider>
   );
 }
 
