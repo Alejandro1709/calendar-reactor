@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import Header from './Header';
+import Header from './auth/Header';
+import Modal from './Modal';
 
 type LayoutProps = {
   title?: string;
@@ -21,6 +22,7 @@ function Layout({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header />
+      <Modal />
       <main className='flex flex-col'>{children}</main>
     </>
   );
