@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Header from './Header';
 
 type LayoutProps = {
   title?: string;
@@ -19,7 +20,8 @@ function Layout({
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className=''>{children}</main>
+      <Header />
+      <main className='flex flex-col'>{children}</main>
     </>
   );
 }
