@@ -2,11 +2,12 @@
 
 import Layout from '@/components/Layout';
 
-function submit() {
+function SubmitPage() {
   return (
     <Layout
       title='Calendtion | Submit'
       description='Submit your schedule here!'
+      session={null}
     >
       <section className='flex flex-col gap-2 p-4'>
         <h1 className='text-2xl font-medium'>Submit your schedule</h1>
@@ -30,4 +31,4 @@ function submit() {
   );
 }
 
-export default submit;
+export default SubmitPage;
