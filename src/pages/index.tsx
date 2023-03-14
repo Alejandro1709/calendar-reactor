@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout';
 import Showcase from '@/components/Showcase';
 import { AuthProvider } from '@/context/authContext';
+import { ModalProvider } from '@/context/modalContext';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 
@@ -14,12 +15,14 @@ type HomeProps = {
 export default function Home({ session }: HomeProps) {
   return (
     <AuthProvider session={session}>
-      <Layout
-        title='Calendtion'
-        description='Upload your schedule and have people react to it!'
-      >
-        <Showcase />
-      </Layout>
+      <ModalProvider>
+        <Layout
+          title='Calendtion'
+          description='Upload your schedule and have people react to it!'
+        >
+          <Showcase />
+        </Layout>
+      </ModalProvider>
     </AuthProvider>
   );
 }
