@@ -1,38 +1,38 @@
+import type IPost from '@/types/showcase';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 function Showcase() {
+  const [showcase, setShowcase] = useState<IPost[]>([]);
+
+  const handleFetch = async () => {
+    const res = await fetch('/api/schedules');
+    const data = await res.json();
+    setShowcase(data.results);
+  };
+
+  useEffect(() => {
+    handleFetch();
+  }, []);
+
   return (
     <section className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-1 transition-all'>
-      <article className='bg-gray-200'>
-        <div className='relative z-10 h-full'>
-          <Image
-            src='https://images.unsplash.com/photo-1678452562928-1d0c269a913b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80'
-            alt=''
-            width={400}
-            height={200}
-            priority
-          />
-          <div className='absolute bottom-0 h-16 w-full bg-white/60 z-20 p-2'>
-            <h2 className='text-lg font-bold'>Que feo esta mi horario...</h2>
-            <p className='text-sm'>@alepeusts99</p>
+      {showcase.map((showcase) => (
+        <article className='bg-gray-200' key={showcase.id}>
+          <div className='relative z-10 h-full'>
+            <Image
+              src={showcase.fileUrl}
+              alt={showcase.content}
+              width={400}
+              height={200}
+              priority
+            />
+            <div className='absolute bottom-0 h-16 w-full bg-white/60 z-20 p-2'>
+              <h2 className='text-lg font-bold'>{showcase.content}</h2>
+            </div>
           </div>
-        </div>
-      </article>
-      <article className='bg-gray-200'>
-        <div className='relative z-10 h-full'>
-          <Image
-            src='https://images.unsplash.com/photo-1678452562928-1d0c269a913b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80'
-            alt=''
-            width={400}
-            height={200}
-            priority
-          />
-          <div className='absolute bottom-0 h-16 w-full bg-white/60 z-20 p-2'>
-            <h2 className='text-lg font-bold'>Que feo esta mi horario...</h2>
-            <p className='text-sm'>@alepeusts99</p>
-          </div>
-        </div>
-      </article>
+        </article>
+      ))}
     </section>
   );
 }
